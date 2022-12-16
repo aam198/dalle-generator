@@ -4,5 +4,8 @@ const port = process.env.PORT || 8000;
 
 const app = express();
 
+// Connect to openaiRoutes Route
+app.use('/openai', require('./routes/openaiRoutes'));
+
 app.listen(port, () => console.log(`Server started on ${port}`)); 
 
