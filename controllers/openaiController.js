@@ -5,9 +5,11 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const openai = new OpenAIApi(configuration);
+
 const generateImage = async (req, res) => {
   try {
-    const response = await OpenAIApi.createImage({
+    const response = await openai.createImage({
       // Text to describe image, will eventually come from front-end
       prompt: "A cute baby sea otter",
       // Number of images
