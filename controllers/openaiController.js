@@ -8,13 +8,18 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const generateImage = async (req, res) => {
+  // Destructing from frontend
+  const { prompt, size } = req.body;  
+
+  const imageSize = size === 'small' ? '256x256' : size === 'medium' ? '512x512' : '1024x1024'; 
+
   try {
     const response = await openai.createImage({
       // Text to describe image, will eventually come from front-end
-      prompt: "A cute baby sea otter",
+      prompt,
       // Number of images
       n: 1,
-      size: "512x512"
+      size: imageSize,
     });
     // To get the url from reponse
     const imageUrl = response.data.data[0].url
