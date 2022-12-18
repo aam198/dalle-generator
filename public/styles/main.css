@@ -11,8 +11,9 @@
 :root {
   --primary-color: #DF7245;
   --dark-primary: #1E272A;
-  --light-primary: #ECE7E1
+  --light-primary: #ECE7E1;
   --orange-hover: #E48B60;
+  --purple: #837598;
 }
 
 body {
@@ -26,7 +27,7 @@ body {
 
 /* Navbar */
 .navbar {
-  background: #333;
+  background: var(--dark-primary);
   color: var(--light-primary);
   padding: 1rem;
   display: flex;
@@ -47,6 +48,7 @@ body {
   color: var(--light-primary);
   text-decoration: none;
   font-size: 1.2rem;
+  transition: color 0.22s ease-in-out;
 }
 
 .navbar a:hover {
@@ -62,7 +64,7 @@ body {
 
 .showcase h1 {
   font-size: 2.5rem;
-  color: #333;
+  color: var(--dark-primary);
   text-align: center;
   padding: 1rem 0;
 }
@@ -92,14 +94,19 @@ form button {
   padding: 1rem 2rem;
   border: none;
   border-radius: 5px;
-  background: #333;
-  color: #fff;
+  background: var(--dark-primary);
+  color: var(--light-primary);
   cursor: pointer;
   margin-top: 20px;
+  transition: transform 0.2s ease;
 }
 
 form button:hover {
   transform: scale(1.1);
+}
+
+form button:active{
+  background: var(--purple);
 }
 
 /* Image */
