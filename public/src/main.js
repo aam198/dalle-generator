@@ -1,5 +1,7 @@
 function onSubmit(e){
   e.preventDefault();
+
+
   const prompt = document.querySelector('#prompt').value;
   const size = document.querySelector('#size').value;
 
@@ -13,6 +15,43 @@ function onSubmit(e){
   generateImageRequest(prompt, size);
 }
 
+async function generateImageRequest(prompt, size) {
+  try {
+    // Calling showSpinner function  while loading
+    showSpinner();
+    const response = await fetch('/openai/generateimage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        prompt, 
+        size
+      }) 
+    });
+  if (!response.ok){
+    removeSpinner();
+    throw new Error('That image could not generated');
+  }
+
+  const data = await response.json();
+  console.log(data);
+  // Get image URL
+  const imageURL = data.data;
+  // Grabbing image ID and setting src with imageURL
+  document.querySelector('#image').src = imageURL;
+
+  // Remove spinner when 
+  removeSpinner();
+
+  }catch (error){
+    // Output error message made above
+    document.querySelector('.msg').textContent = error;
+  }
+  
+
+}
+
 function showSpinner() {
   document.querySelector('.spinner').classList.add('show');
 }
@@ -21,9 +60,6 @@ function removeSpinner() {
   document.querySelector('.spinner').classList.remove('show');
 }
 
-async function generateImageRequest(prompt, size) {
-  // Show spinner if loading
 
-}
 
 document.querySelector('#image-form').addEventListener('submit', onSubmit);
