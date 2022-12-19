@@ -1,7 +1,9 @@
 function onSubmit(e){
   e.preventDefault();
 
-
+  // Clear out the image and message when user submits.
+  document.querySelector('.msg').textContent = '';
+  // document.querySelector('#image').src = '';
   const prompt = document.querySelector('#prompt').value;
   const size = document.querySelector('#size').value;
 
@@ -38,11 +40,13 @@ async function generateImageRequest(prompt, size) {
   console.log(data);
   // Get image URL
   const imageURL = data.data;
+  console.log(imageURL);
   // Grabbing image ID and setting src with imageURL
   document.querySelector('#image').src = imageURL;
 
   // Remove spinner when 
   removeSpinner();
+  
 
   }catch (error){
     // Output error message made above
@@ -58,6 +62,8 @@ function showSpinner() {
 
 function removeSpinner() {
   document.querySelector('.spinner').classList.remove('show');
+  const prompt = document.querySelector('#prompt');
+  prompt.value = "";
 }
 
 
